@@ -1,0 +1,24 @@
+/////in work :  set, lensProp, lensPath (都是Object类型)
+
+let json = { a: 1, b: 2, c: {x: 5, y: 6}};
+
+lensProp(['a'], json)  || lensPath(['c','x'], json)   =>   function (r){return function(e){return le(function(t){return n(t,e)},r(t(e)))}}
+
+set(lensProp(['a'], json), 10, json)                 =>   {"a": 10, "b": 2, "c": {"x": 5, "y": 6}} 
+
+set(lensPath(['c', 'x'], json), 50, json)            =>   {"a": 1, "b": 2, "c": {"x": 50, "y": 6}}
+
+set(lensPath(['b'], json), 20, json)                 =>   {"a": 1, "b": 20, "c": {"x": 5, "y": 6}}
+
+set(lensProp(['c', 'y'], json), 60, json)            =>   {"a": 1, "b": 2, "c": {"x": 5, "y": 6}, "c,y": 60}
+
+
+let json = { a: 1, b: 2, c: {x: 5, y: 6, z: {s : 7}}};
+
+set(lensPath(['c', 'z', 's'], json), 70, json)       =>   {"a": 1, "b": 2, "c": {"x": 5, "y": 6, "z": {"s": 70}}}
+
+
+==>  
+  set: 替换 （ 对于json存在的名称则更改， 不存在的则新增 ）；
+  lensProp: 能获取到json对象里的第一层；
+  lensPath: 能获取到json对象里的第一层、第二层、第n层，与path相似。
